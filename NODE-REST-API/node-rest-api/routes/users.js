@@ -1,9 +1,11 @@
 const router = require('express').Router();
 const User = require("../models/User")
 const bcrypt = require('bcrypt')
+
+
 //update user
 router.put('/:id', async (req, res) => {
-    console.log(req.body.userId, req.params.id)
+    
     if (req.body.userId === req.params.id || req.body.isAdmin) {
         if (req.body.password) {
             try {
@@ -22,7 +24,7 @@ router.put('/:id', async (req, res) => {
         }
     }
     else {
-        return res.status(403).json("You can update only your account!")
+        return res.status(403).json("You don't have access!")
     }
 })
 
@@ -66,9 +68,8 @@ router.put("/:id/follow", async (req, res) => {
             res.status(500).json(err)
         }
     }
-}
-    
 })
+    
 //unfollow a user
 
 
